@@ -1,28 +1,39 @@
-import { Controller } from '@nestjs/common';
-import { ProblemService } from 'src/problem/services/problem/problem.service';
 import {
+  Body,
+  Controller,
   Get,
   Param,
   ParseIntPipe,
   Post,
-  Body,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateProblemDto } from 'src/problem/services/problem/dtos/CreateProblem.dto';
+import { PaginationResponse } from 'src/common/pagination/PaginationResponse';
+import { PaginationDto } from 'src/common/pagination/dtos/Pagination.dto';
+import { Problem } from 'src/database/entities';
+import { CreateProblemDto } from 'src/problem/dtos/CreateProblem.dto';
+import { ProblemService } from 'src/problem/services/problem/problem.service';
 
 @Controller('problem')
 export class ProblemController {
   constructor(private readonly problemService: ProblemService) {}
 
-  @Get('id/:id')
-  public getProblemById(@Param('id', ParseIntPipe) id: number) {
-    return this.problemService.findProblemById(id);
+  @Get()
+  getProblems(
+    @Query() paginationDto: PaginationDto,
+  ): Promise<PaginationResponse<Problem>> {
+    return this.problemService.getProblemsPageable(paginationDto);
   }
 
-  @Post()
-  @UsePipes(ValidationPipe)
-  public createPost(@Body() createProblemDto: CreateProblemDto) {
+  @Post('create')
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+  createProblem(@Body() createProblemDto: CreateProblemDto): Promise<Problem> {
     return this.problemService.createProblem(createProblemDto);
+  }
+
+  @Get('find/:id')
+  findProblemById(@Param('id', ParseIntPipe) id: number): Promise<Problem> {
+    return this.problemService.findProblemById(id);
   }
 }

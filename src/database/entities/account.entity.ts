@@ -9,7 +9,6 @@ export class Account {
 
   @Column({
     nullable: false,
-    length: 255,
     unique: true,
   })
   user_id: string;
