@@ -17,12 +17,13 @@ export class ProblemService {
   public async getProblemsPageable(
     pageableProps: PaginationDto,
   ): Promise<PaginationResponse<Problem>> {
+    const alias = 'problem';
     return Pagination.paginate<Problem>(
       this.problemRepository
-        .createQueryBuilder()
-        .orderBy('problem.created', 'DESC'),
+        .createQueryBuilder(alias)
+        .orderBy(`${alias}.createdAt`, 'DESC'),
       pageableProps,
-      'problem',
+      alias,
     );
   }
 

@@ -21,7 +21,14 @@ export class ProblemController {
 
   @Get()
   getProblems(
-    @Query() paginationDto: PaginationDto,
+    @Query(
+      new ValidationPipe({
+        transform: true,
+        transformOptions: { enableImplicitConversion: true },
+        forbidNonWhitelisted: true,
+      }),
+    )
+    paginationDto: PaginationDto,
   ): Promise<PaginationResponse<Problem>> {
     return this.problemService.getProblemsPageable(paginationDto);
   }

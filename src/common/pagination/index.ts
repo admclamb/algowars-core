@@ -23,6 +23,9 @@ export class Pagination {
   }
 
   public static calculatePageTotal(size: number, total: number): number {
-    return Math.floor(size / total);
+    if (total === 0) {
+      return 0;
+    }
+    return Math.ceil(size / total);
   }
 }
