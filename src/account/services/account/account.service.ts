@@ -10,6 +10,7 @@ export class AccountService {
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
   ) {}
+
   public getHello(): string {
     return 'Hello humans!';
   }

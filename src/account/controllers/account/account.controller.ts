@@ -3,11 +3,15 @@ import {
   Controller,
   Get,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateAccountDto } from 'src/account/dtos/create-account.dto';
+import { AccountPermissions } from 'src/account/permissions/account.permissions';
 import { AccountService } from 'src/account/services/account/account.service';
+import { AuthorizationGuard } from 'src/common/authorization/authorization.guard';
+import { PermissionsGuard } from 'src/common/authorization/permissions.guard';
 import { Account } from 'src/database/entities';
 
 @Controller('account')
@@ -19,6 +23,8 @@ export class AccountController {
     return this.accountService.getHello();
   }
 
+  @UseGuards(PermissionsGuard([AccountPermissions.WRITE_USER]))
+  @UseGuards(AuthorizationGuard)
   @Post('create')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   createAccount(@Body() createAccountDto: CreateAccountDto): Promise<Account> {

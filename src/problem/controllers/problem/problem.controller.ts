@@ -6,13 +6,17 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthorizationGuard } from 'src/common/authorization/authorization.guard';
+import { PermissionsGuard } from 'src/common/authorization/permissions.guard';
 import { PaginationResponse } from 'src/common/pagination/PaginationResponse';
 import { PaginationDto } from 'src/common/pagination/dtos/Pagination.dto';
 import { Problem } from 'src/database/entities';
 import { CreateProblemDto } from 'src/problem/dtos/create-problem.dto';
+import { ProblemPermissions } from 'src/problem/permissions/problem.permissions';
 import { ProblemService } from 'src/problem/services/problem/problem.service';
 
 @Controller('problem')
@@ -33,6 +37,8 @@ export class ProblemController {
     return this.problemService.getProblemsPageable(paginationDto);
   }
 
+  @UseGuards(PermissionsGuard([ProblemPermissions.WRITE_ADMIN]))
+  @UseGuards(AuthorizationGuard)
   @Post('create')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   createProblem(@Body() createProblemDto: CreateProblemDto): Promise<Problem> {
