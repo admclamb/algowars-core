@@ -4,7 +4,7 @@ import { Pagination } from 'src/common/pagination';
 import { PaginationResponse } from 'src/common/pagination/PaginationResponse';
 import { PaginationDto } from 'src/common/pagination/dtos/Pagination.dto';
 import { Problem } from 'src/database/entities';
-import { CreateProblemDto } from 'src/problem/dtos/CreateProblem.dto';
+import { CreateProblemDto } from 'src/problem/dtos/create-problem.dto';
 import { Repository } from 'typeorm';
 
 @Injectable()
