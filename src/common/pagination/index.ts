@@ -8,7 +8,7 @@ export class Pagination {
     entityType: string,
   ): Promise<PaginationResponse<T>> {
     const [results = [], count = 0] = await query
-      .where(`${entityType}.createdAt > :timestamp`, {
+      .where(`${entityType}.createdAt < :timestamp`, {
         timestamp,
       })
       .take(size)
