@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { MessagesModule } from './messages/messages.module';
+import typeorm from './config/typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceOptions } from 'db/data-source';
 import { AccountModule } from './account/account.module';
 import { ProblemModule } from './problem/problem.module';
-import typeorm from './config/typeorm';
-import { dataSourceOptions } from 'db/data-source';
 
 @Module({
   imports: [
@@ -15,10 +14,11 @@ import { dataSourceOptions } from 'db/data-source';
       load: [typeorm],
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
+    MessagesModule,
     AccountModule,
     ProblemModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

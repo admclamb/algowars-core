@@ -10,8 +10,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthorizationGuard } from 'src/common/authorization/authorization.guard';
-import { PermissionsGuard } from 'src/common/authorization/permissions.guard';
+import { AuthorizationGuard } from 'src/authorization/authorization.guard';
+import { PermissionsGuard } from 'src/authorization/permissions.guard';
 import { PaginationResponse } from 'src/common/pagination/PaginationResponse';
 import { PaginationDto } from 'src/common/pagination/dtos/Pagination.dto';
 import { Problem } from 'src/database/entities';

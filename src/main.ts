@@ -1,8 +1,9 @@
+import helmet from 'helmet';
+import * as nocache from 'nocache';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
-import * as nocache from 'nocache';
-import helmet from 'helmet';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 function checkEnvironment(configService: ConfigService) {
   const requiredEnvVars = [
@@ -32,10 +33,13 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  // app.useGlobalFilters(new HttpExceptionFilter());
+
   app.use(nocache());
 
   app.enableCors({
     origin: configService.get<string>('CLIENT_ORIGIN_URL'),
+    methods: ['GET'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     maxAge: 86400,
   });
@@ -52,6 +56,8 @@ async function bootstrap() {
       },
     }),
   );
+
   await app.listen(configService.get<string>('PORT'));
 }
+
 bootstrap();
