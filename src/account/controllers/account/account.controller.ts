@@ -2,13 +2,16 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateAccountDto } from 'src/account/dtos/create-account.dto';
-import { AccountPermissions } from 'src/account/permissions/account.permissions';
+import { AccountExistException } from 'src/account/exceptions/account-exist.exception';
+import { UsernameExistException } from 'src/account/exceptions/username-exist.exception';
 import { AccountService } from 'src/account/services/account/account.service';
 import { AuthorizationGuard } from 'src/authorization/authorization.guard';
 import { PermissionsGuard } from 'src/authorization/permissions.guard';
@@ -24,9 +27,29 @@ export class AccountController {
   }
 
   @UseGuards(AuthorizationGuard)
+  @Get('/find')
+  findAccount(@Query('sub') user_id: string): Promise<Account> {
+    return this.accountService.findAccountByUserId(user_id);
+  }
+
+  @UseGuards(AuthorizationGuard)
   @Post('create')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
-  createAccount(@Body() createAccountDto: CreateAccountDto): Promise<Account> {
+  async createAccount(
+    @Body() createAccountDto: CreateAccountDto,
+  ): Promise<Account> {
+    const { user_id, username } = createAccountDto;
+
+    const accountExist = await this.accountService.findAccountByUserId(user_id);
+    if (accountExist) {
+      throw new AccountExistException();
+    }
+    const usernameExist = await this.accountService.findAccountByUsername(
+      username,
+    );
+    if (usernameExist) {
+      throw new UsernameExistException();
+    }
     return this.accountService.createAccount(createAccountDto);
   }
 }

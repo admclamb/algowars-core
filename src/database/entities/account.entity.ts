@@ -17,6 +17,12 @@ export class Account {
   })
   user_id: string;
 
+  @Column({
+    nullable: false,
+    unique: true,
+  })
+  username: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
