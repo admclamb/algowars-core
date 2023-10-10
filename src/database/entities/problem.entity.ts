@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Account } from './account.entity';
+import { ProblemCategory } from './problem-category.entity';
 
 @Entity()
 export class Problem {
@@ -41,6 +43,12 @@ export class Problem {
     type: 'int',
   })
   dislikes: number;
+
+  @OneToMany(
+    () => ProblemCategory,
+    (problemCategory) => problemCategory.problem,
+  )
+  problemCategories: ProblemCategory[];
 
   @CreateDateColumn()
   createdAt: Date;

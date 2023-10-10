@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "problemId": 1,
+    "languageId": 1,
+    "baseCode": "/**\n* @param {number} n\n* @param {string[]}\n*/\nconst fizzBuzz = funct(n) {\n\n}"
+  }
+]
