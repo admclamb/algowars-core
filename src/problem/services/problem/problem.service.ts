@@ -39,9 +39,11 @@ export class ProblemService {
   public findProblemInfoLanguagesById(
     id: number,
   ): Promise<ProblemInfoLanguage[]> {
-    return this.problemInfoLanguageRepository.find({
-      where: { problem: { id } },
-    });
+    return this.problemInfoLanguageRepository
+      .createQueryBuilder('problemInfoLanguage')
+      .leftJoinAndSelect('problemInfoLanguage.language', 'language') // Join with the 'Language' entity
+      .where('problemInfoLanguage.problem.id = :id', { id })
+      .getMany();
   }
 
   public async findProblemById(id: number): Promise<Problem> {
