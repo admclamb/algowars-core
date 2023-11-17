@@ -33,7 +33,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  // app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   app.use(nocache());
 

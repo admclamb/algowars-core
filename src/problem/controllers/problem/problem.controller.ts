@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   ParseIntPipe,
   Post,
   Query,
@@ -19,7 +18,7 @@ import { CreateProblemDto } from 'src/problem/dtos/create-problem.dto';
 import { ProblemPermissions } from 'src/problem/permissions/problem.permissions';
 import { ProblemService } from 'src/problem/services/problem/problem.service';
 
-@Controller('problem')
+@Controller('v1/problem')
 export class ProblemController {
   constructor(private readonly problemService: ProblemService) {}
 
@@ -45,8 +44,8 @@ export class ProblemController {
     return this.problemService.createProblem(createProblemDto);
   }
 
-  @Get('find/:id')
-  findProblemById(@Param('id', ParseIntPipe) id: number): Promise<Problem> {
+  @Get('find')
+  findProblemById(@Query('id', ParseIntPipe) id: number): Promise<Problem> {
     return this.problemService.findProblemById(id);
   }
 }
