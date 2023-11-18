@@ -60,7 +60,7 @@ export class ProblemService {
     const problemInfoLanguage = await this.findProblemInfoLanguagesById(id);
     const problemWithInfo: ProblemWithInfos = {
       ...problem,
-      infos: problemInfoLanguage,
+      problemInfo: problemInfoLanguage,
     };
     return problemWithInfo;
   }

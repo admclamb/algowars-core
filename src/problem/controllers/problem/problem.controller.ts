@@ -14,6 +14,8 @@ import { PermissionsGuard } from 'src/authorization/permissions.guard';
 import { PaginationResponse } from 'src/common/pagination/PaginationResponse';
 import { PaginationDto } from 'src/common/pagination/dtos/Pagination.dto';
 import { Problem } from 'src/database/entities';
+import { ProblemInfoLanguage } from 'src/database/entities/problem-info-language.entity';
+import { ProblemWithInfos } from 'src/database/models/problem-with-infos';
 import { CreateProblemDto } from 'src/problem/dtos/create-problem.dto';
 import { ProblemPermissions } from 'src/problem/permissions/problem.permissions';
 import { ProblemService } from 'src/problem/services/problem/problem.service';
@@ -45,7 +47,9 @@ export class ProblemController {
   }
 
   @Get('find')
-  findProblemById(@Query('id', ParseIntPipe) id: number): Promise<Problem> {
+  async findProblemById(
+    @Query('id', ParseIntPipe) id: number,
+  ): Promise<Problem> {
     return this.problemService.findProblemById(id);
   }
 }

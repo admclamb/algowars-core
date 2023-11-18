@@ -17,7 +17,7 @@ import { AuthorizationGuard } from 'src/authorization/authorization.guard';
 import { PermissionsGuard } from 'src/authorization/permissions.guard';
 import { Account } from 'src/database/entities';
 
-@Controller('account')
+@Controller('v1/account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
