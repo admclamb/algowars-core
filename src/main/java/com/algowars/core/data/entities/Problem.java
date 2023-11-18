@@ -17,7 +17,7 @@ public class Problem {
     @Column(unique = true, nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 765)
     private String question;
 
     @ManyToMany
@@ -27,7 +27,7 @@ public class Problem {
     private List<ProblemSetup> problemSetups;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id", nullable = false)
+    @JoinColumn(name = "account", nullable = false)
     private Account createdBy;
 
     @Column(nullable = false, columnDefinition = "integer default 0")
