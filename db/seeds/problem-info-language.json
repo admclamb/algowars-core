@@ -1,8 +1,0 @@
-[
-  {
-    "id": 1,
-    "problemId": 1,
-    "languageId": 1,
-    "baseCode": "/*\n* @param {number} n\n* @return {string[]}\n*/\nconst fizzBuzz = function(n) {\n\n// code here\n}"
-  }
-]

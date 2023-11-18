@@ -1,4 +1,4 @@
-package config;
+package com.algowars.core.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

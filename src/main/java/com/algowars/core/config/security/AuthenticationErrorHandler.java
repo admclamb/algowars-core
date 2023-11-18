@@ -1,4 +1,4 @@
-package config.security;
+package com.algowars.core.config.security;
 
 import com.algowars.core.data.models.ErrorMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;

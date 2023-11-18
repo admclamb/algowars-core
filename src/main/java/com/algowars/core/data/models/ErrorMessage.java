@@ -1,2 +1,13 @@
-package com.algowars.core.data.models;public class ErrorMessage {
+package com.algowars.core.data.models;
+
+import lombok.Value;
+
+@Value
+public class ErrorMessage {
+
+    private String message;
+
+    public static ErrorMessage from(final String message) {
+        return new ErrorMessage(message);
+    }
 }

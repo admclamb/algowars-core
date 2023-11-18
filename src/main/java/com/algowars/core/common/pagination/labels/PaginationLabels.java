@@ -1,4 +1,4 @@
-package com.algowars.core.pagination.labels;
+package com.algowars.core.common.pagination.labels;
 
 public class PaginationLabels {
     public static final String PAGE_NOT_BLANK = "Page cannot be undefined";

@@ -1,6 +1,6 @@
-package com.algowars.core.pagination.dtos;
+package com.algowars.core.common.pagination.dtos;
 
-import com.aiquizgenerator.backend.common.pagination.labels.PaginationLabels;
+import com.algowars.core.common.pagination.labels.PaginationLabels;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

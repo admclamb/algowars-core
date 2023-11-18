@@ -1,4 +1,4 @@
-package config;
+package com.algowars.core.config;
 
 import com.algowars.core.data.models.ErrorMessage;
 import jakarta.servlet.http.HttpServletRequest;

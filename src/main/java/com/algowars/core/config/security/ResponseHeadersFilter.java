@@ -1,4 +1,4 @@
-package config.security;
+package com.algowars.core.config.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
