@@ -26,8 +26,8 @@ public class Problem {
     @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProblemSetup> problemSetups;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account", nullable = false)
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Account createdBy;
 
     @Column(nullable = false, columnDefinition = "integer default 0")

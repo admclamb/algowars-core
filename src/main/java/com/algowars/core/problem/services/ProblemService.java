@@ -21,4 +21,6 @@ public class ProblemService {
         Page<Problem> problems = problemRepository.findAllBeforeTimestamp(paging, paginationDTO.getTimestamp());
         return PaginationMapper.map(problems);
     }
+
+    public Problem findById(Long id) { return problemRepository.findById(id).orElse(null); }
 }

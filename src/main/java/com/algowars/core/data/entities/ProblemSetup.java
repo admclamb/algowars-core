@@ -10,6 +10,7 @@ public class ProblemSetup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.DETACH)
     private Problem problem;
 
