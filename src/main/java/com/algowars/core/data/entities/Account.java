@@ -77,4 +77,12 @@ public class Account {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public List<Problem> getCreatedProblems() {
+        return createdProblems;
+    }
+
+    public void setCreatedProblems(List<Problem> createdProblems) {
+        this.createdProblems = createdProblems;
+    }
 }

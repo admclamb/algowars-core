@@ -1,6 +1,7 @@
 package com.algowars.core.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +11,8 @@ public class ProblemSetup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.DETACH)
     private Problem problem;
 
     @ManyToOne(fetch = FetchType.EAGER)

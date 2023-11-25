@@ -5,7 +5,9 @@ import com.algowars.core.common.pagination.dtos.PaginationResponse;
 import com.algowars.core.common.pagination.mapper.PaginationMapper;
 import com.algowars.core.data.entities.Problem;
 import com.algowars.core.problem.repositories.ProblemRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +19,12 @@ public class ProblemService {
     private final ProblemRepository problemRepository;
 
     public PaginationResponse<Problem> findAllPaginated(PaginationDTO paginationDTO) {
-        Pageable paging = PageRequest.of(paginationDTO.getPage() - 1, paginationDTO.getSize());
-        Page<Problem> problems = problemRepository.findAllBeforeTimestamp(paging, paginationDTO.getTimestamp());
-        return PaginationMapper.map(problems);
+            Pageable paging = PageRequest.of(paginationDTO.getPage() - 1, paginationDTO.getSize());
+            Page<Problem> problems = problemRepository.findAllBeforeTimestamp(paging, paginationDTO.getTimestamp());
+            return PaginationMapper.map(problems);
     }
 
-    public Problem findById(Long id) { return problemRepository.findById(id).orElse(null); }
+    public Problem findById(Long id) {
+        return problemRepository.findByIdAggregated(id);
+    }
 }

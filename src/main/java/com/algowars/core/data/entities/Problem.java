@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "problem")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"createdBy"})
 public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +26,10 @@ public class Problem {
     @ManyToMany
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProblemSetup> problemSetups;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", nullable = false)
     private Account createdBy;
 

@@ -10,11 +10,15 @@ import javax.script.ScriptException;
 @RequiredArgsConstructor
 @Service
 public class EvaluatorService {
+
+    private ScriptEngine jsEngine;
+
+    EvaluatorService(ScriptEngineManager manager) {
+        jsEngine = manager.getEngineByName("graal.js");
+    }
     public Object runScript(String code) throws ScriptException {
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("graal.js"); // or "graal.js" for GraalVM
         try {
-            return engine.eval(code);
+            return jsEngine.eval(code);
         } catch (ScriptException e) {
             e.printStackTrace();
             throw e;
