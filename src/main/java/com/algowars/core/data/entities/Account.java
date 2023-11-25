@@ -35,6 +35,9 @@ public class Account {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    private List<Problem> createdProblems;
+
     public Long getId() {
         return id;
     }

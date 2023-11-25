@@ -68,6 +68,16 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.graalvm.js</groupId>
+			<artifactId>js</artifactId>
+			<version>23.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.js</groupId>
+			<artifactId>js-scriptengine</artifactId>
+			<version>23.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -89,5 +99,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

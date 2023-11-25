@@ -1,6 +1,8 @@
 package com.algowars.core.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "problem")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +30,7 @@ public class Problem {
     private List<ProblemSetup> problemSetups;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "created_by_id", nullable = false)
     private Account createdBy;
 
     @Column(nullable = false, columnDefinition = "integer default 0")
